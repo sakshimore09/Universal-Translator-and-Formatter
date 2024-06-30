@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model deployement Image to text</title>
+    <link rel="stylesheet" href="static/style1.css">
+
+</head>
+
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('predict') }}">Home</a></li>
+            <li><a href="{{ url_for('img_to_text') }}">News</a></li>
+            <li><a href="contact.asp">Contact</a></li>
+            <li><a href="about.asp">About</a></li>
+        </ul>
+    </nav>
+
+    <div class="img-container">
+        <h1 style="text-align:center" class="img-heading">Image to text translation</h1>
+
+        <form style="text-align:center" action="{{ url_for('img_to_text') }}" method="post" enctype="multipart/form-data">
+            <label for="myfile">Select a file:</label>
+            <input type="file" name="file"><br><br>
+            <!--<label for="source">Chose source lang:</label>-->
+                <select name="source" placeholder="lang">
+                <option value='mr'>source lang</option>
+                <option value='hi'>hindi</option>
+                <option value='mr'>marathi</option>
+                <option value='te'>telegu</option>
+                <option value='pa'>punjabi</option>
+                <option value='en'>English</option>
+                </select>
+            <!--<label for="cars">Chose destination lang:</label>-->
+                <select name="cars" placeholder="lang">
+                <option value='en'>destination lang</option>
+                <option value='hi'>hindi</option>
+                <option value='mr'>marathi</option>
+                <option value='te'>telegu</option>
+                <option value='en'>English</option>
+                <option value='pa'>punjabi</option>
+                </select>
+                <br>
+                <br>
+                <br>
+                <input type="submit" name="predict"class="my-cta-button" value="Predict">
+                <br>
+        </form>
+
+    <div style="text-align:center" class="results">
+        <h3>Text given in image</h3>
+        {{ocr_output}}
+        <h3>Translated text:</h3>
+        {{text_msg}}
+
+    </div>
+    <div>
+
+</body>
+</html>

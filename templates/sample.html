@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model deployement video to text</title>
+
+</head>
+
+<body>
+    <html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script type="text/javascript" src="https://www.google.com/jsapi">
+    </script>
+    <script type="text/javascript">
+
+      // Load the Google Transliterate API
+      google.load("elements", "1", {
+            packages: "transliteration"
+          });
+
+      function onLoad() {
+        var options = {
+            sourceLanguage:
+                google.elements.transliteration.LanguageCode.ENGLISH,
+            destinationLanguage:
+                [google.elements.transliteration.LanguageCode.HINDI],
+            shortcutKey: 'ctrl+g',
+            transliterationEnabled: true
+        };
+
+        // Create an instance on TransliterationControl with the required
+        // options.
+        var control =
+            new google.elements.transliteration.TransliterationControl(options);
+
+        // Enable transliteration in the textbox with id
+        // 'transliterateTextarea'.
+        control.makeTransliteratable(['transliterateTextarea']);
+      }
+      google.setOnLoadCallback(onLoad);
+    </script>
+  </head>
+  <body>
+    Type in Hindi (Press Ctrl+g to toggle between English and Hindi)<br>
+    <textarea id="transliterateTextarea" style="width:600px;height:200px"></textarea>
+  </body>
+</html> 
+<script type="text/javascript" src="https://www.google.com/jsapi">
+    type="text/javascript">
+    google.load("elements", "1", {
+    packages: "transliterate"
+    });
+    //Load the Language API.
+google.load("language", "1");
+
+//Call google.language.transliterate() 
+google.language.transliterate(["Namaste"], "en", "hi", function(result) {
+  if (!result.error) {
+    var container = document.getElementById("transliteration");
+    if (result.transliterations && result.transliterations.length > 0 &&
+        result.transliterations[0].transliteratedWords.length > 0) {
+      container.innerHTML = result.transliterations[0].transliteratedWords[0];
+    }
+  }
+});
+  </script>
+            
+</body>
+</html>

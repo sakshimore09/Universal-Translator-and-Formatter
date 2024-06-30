@@ -1,0 +1,115 @@
+*{
+    padding:0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;  
+}
+
+body{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("https://media.istockphoto.com/photos/blue-mesh-gradient-blurred-motion-abstract-background-picture-id1185747322?k=20&m=1185747322&s=612x612&w=0&h=Sy7s4nSTKEbDFY1HRAijhMJVRZd4_9rACOOjkkNa5bs=")
+}
+
+nav{
+    background: rgb(255, 255, 255);
+    
+    height: 80px;
+    width: 100%;
+}
+label.logo{
+    color: white;
+    font-size: 35px;
+    line-height: 80px;
+    padding: 0 100px;
+    font-weight: bold;
+}
+nav ul {
+    float: right;
+    margin-right: 20px;
+}
+nav ul li{
+    display: inline-block;
+    line-height: 80px;
+    margin: 0 5px;
+}
+nav ul li a{
+    color: aliceblue;
+    font-size: 17px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+a.active , a:hover{
+    background: #58778f;
+    transition: .5s;
+
+}
+.checkbtn{
+    font-size: 30px;
+    color: aliceblue;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+}
+
+
+
+
+.container{
+    margin: 14px;
+    padding: 14px;
+    
+}
+.container-heading{
+    color:blueviolet;
+    font-size: 45px;
+}
+.description{
+    color: blue;
+    font-size: 35px;
+}
+.ml-container{
+    margin: 12px;
+    padding: 13px;
+}
+
+.message-box{
+    font-size: 25px;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: normal;
+    border-radius: 23px; 
+    border-width: 4px;
+    box-shadow: 4px 4px 4px 4px #58778f;
+
+}
+
+.my-cta-button{
+    height: 50px;
+    font-size: 25px;
+    color:limegreen;
+    background-color: #58778f;
+    border-radius: 20px;
+}
+
+#txtInput{
+    font-size: 25px;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: normal;
+    border-radius: 23px;
+    border-width: 4px;
+    box-shadow: 4px 4px 4px 4px #58778f;
+}
+
+#btnSpeak{
+    height: 45px;
+}
+
+
+.main-container{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("https://media.istockphoto.com/photos/blue-mesh-gradient-blurred-motion-abstract-background-picture-id1185747322?k=20&m=1185747322&s=612x612&w=0&h=Sy7s4nSTKEbDFY1HRAijhMJVRZd4_9rACOOjkkNa5bs=")
+}
+

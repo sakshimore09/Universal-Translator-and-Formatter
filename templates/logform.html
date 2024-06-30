@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image to text</title>
+    <link href="https://fonts.googleapis.com/css?family=Assistant:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="static/logstyle.css">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+          crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+
+<!-- partial:index.partial.html -->
+<section class='login' id='login'>
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">हमारी भाषा</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+                 aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">हमारी भाषा</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"
+                               href="{{ url_for('predict') }}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('login') }}">Img to Txt</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('vid_to_text') }}">video to Txt</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('summarize') }}">summarize text</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('send_email') }}">Feedback from</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('tutorial') }}">Demo Tutorial</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('orglogin') }}">login</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class='head'>
+        <h1 class='company'>Image-To-Text</h1>
+    </div>
+    <h3 style="text-align:center; color:black;">{{success}}</h3>
+    <p class='msg'>Fill Info Correctly</p>
+    <div class='form'>
+        <!-- Form for Text Extraction -->
+        <form action="{{ url_for('extract_text') }}" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" placeholder='Username' class='text' id='username' required
+                   multiple><br><br>
+            <input class="form-control"  type="password" name="password" placeholder="Password" class="text" required><br><br>
+            <button class="btn btn-dark" type="submit" name="predict" class='btn-login' value="Predict"
+                    id='do-login'>Extracted text
+            </button>
+        </form>
+        <br>
+        <!-- Form for Translation -->
+        <form action="{{ url_for('translate_text') }}" method="post">
+          <input type="hidden" name="extracted_text" id="extractedTextHidden">
+
+            <select name="source" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                <option value='mr'>source lang</option>
+                <option value='hi'>hindi</option>
+                <option value='mr'>marathi</option>
+                <option value='te'>telegu</option>
+                <option value='pa'>punjabi</option>
+                <option value='en'>English</option>
+            </select><br>
+            <select name="cars" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                <option value='en'>destination lang</option>
+                <option value='hi'>hindi</option>
+                <option value='mr'>marathi</option>
+                <option value='te'>telegu</option>
+                <option value='en'>English</option>
+                <option value='pa'>punjabi</option>
+            </select><br>
+            <button class="btn btn-dark" onclick="updateHiddenField()" type="submit">Translate</button>
+        </form>
+
+        <br>
+        <button class="btn btn-light"><a href="{{ url_for('email') }}">send mail</a></button><br>
+        <br>
+        <div style="text-align:center" class="results">
+            <h5 style="text-align:left; color: black;">Text given in image :</h5>
+            <textarea class="form-control" id="ocrOutputTextArea" style="width:100%; font-size: 20px;" rows="7" cols="75">{{ocr_output}}{{ocr}}</textarea>
+            <br>
+            <h5 style="text-align:left; color: black;">Translated text:</h5>
+            <textarea class="form-control" id="ocrOutputTextArea" style="width:100%; font-size: 20px"
+                      rows="7" cols="75">{{text_msg}}</textarea>
+            <br>
+            <h5 style="text-align:left; color: black;">Transliterate text:</h5>
+            <textarea class="form-control" id="ocrOutputTextArea" style="width:100%; font-size: 20px"
+                      rows="7" cols="75">{{scpt}}</textarea>
+
+        </div>
+    </div>
+    <div class="results">
+        <br>
+    </div>
+</section>
+<script>
+  function updateHiddenField() {
+      // Get the value from the textarea
+      var extractedText = $("#ocrOutputTextArea").val();
+      
+      // Set the value of the hidden input
+      $("#extractedTextHidden").val(extractedText);
+      
+      // Optional: Log the value to the console
+      console.log("Updated hidden field value:", extractedText);
+  }
+  </script>
+<footer>
+    <!--<p>copyrights reserve to मेरी भाषा</p>
+    <p>Made with <span class='heart'>&hearts;</span> by Bridges(<a
+            href='https://github.com/pxntxs'>@pxntxs</a>)</p>
+    <p>Gradient: <a href='https://uigradients.com/#Turquoiseflow'>https://uigradients.com/#Turquoiseflow</a></p>-->
+    <!-- partial
+    <script  src="./script.js"></script>-->
+</footer>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Deployment</title>
+    <script src="https://kit.fontawesome.com/5f3f547070.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Yatra+One&display=swap" rel="stylesheet">
+    <link href="https://icons.getbootstrap.com/icons/mic/" rel="style.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/a076do5399.js"></script>
+    <link rel="stylesheet" href="static/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/orgstyle.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+      <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+    
+
+
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Offcanvas dark navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Dark offcanvas</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{{ url_for('predict') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ url_for('login') }}">Img to Txt</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  </ul>
+                </li>
+              </ul>
+              <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-success" type="submit">Search</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <br>
+
+<div class="main-container">
+    <div align="center" class="container">
+        <h2  class='container-heading'><span class="heading_font">Language translator</span></h2>
+        <div class='description'>
+            <p>A Machine Learning Web App, Built with Flask, Deployed using Heroku.</p>
+        </div>
+    </div>
+    
+
+    <!-- Text Area -->
+    <div align="center" class="ml-container">
+        <form action= "{{ url_for('predict') }}" method="POST">
+            
+            <!--<label for="source">Choose source lang:</label>-->
+            <select name="source" placeholder="lang">
+             <option value='mr'>Source lang</option>
+             <option value='hi'>Hindi</option>
+             <option value='mr'>Marathi</option>
+             <option value='te'>Telegu</option>
+             <option value='pa'>Punjabi</option>
+             <option value='en'>English</option>
+             <option value='gu'>Gujarati</option>
+             <option value='ta'>Tamil</option>
+             <option value='ml'>Malayam</option>
+             <option value='kn'>Kannada</option>
+             <option value='bn'>Bengali</option>
+            </select>
+            <br>
+            <br>
+            
+            <textarea class='message-box' name="message" rows="10" cols="75" placeholder="Enter Your English Text Here..." id="speechToText">{{msg}}</textarea>
+            
+            <!-- <label for="cars">Chose destination lang:</label>
+            <select name="cars" placeholder="lang">
+             <option value='hi'>hindi</option>
+             <option value='mr'>marathi</option>
+             <option value='te'>telegu</option>
+             <option value='en'>English</option>
+             <option value='pa'>punjabi</option>
+            </select>
+            <br> -->
+            <!-- <label for="source">Chose source lang:</label>
+            <select name="source" placeholder="lang">
+             <option value='hi'>hindi</option>
+             <option value='mr'>marathi</option>
+             <option value='te'>telegu</option>
+             <option value='pa'>punjabi</option>
+             <option value='en'>English</option>
+            </select>
+            <br>
+             -->
+            
+            
+            <!-- <input type="submit" name="translator"class="my-cta-button" value="Translator"> -->
+        
+        <br>
+
+        
+        
+         <br>
+         <br>
+        
+        
+        <!-- Select Voice: <select id='voiceList'></select> <br><br> -->
+
+        <input type="submit" name="translator"class="my-cta-button" value="Translate">
+        <br>
+        <br>
+        
+       
+        <!--<label for="cars">Choose destination lang:</label>-->
+        <select name="cars" placeholder="lang">
+         <option value='en'>Destination lang</option>
+         <option value='hi'>Hindi</option>
+         <option value='mr'>Marathi</option>
+         <option value='te'>Telegu</option>
+         <option value='en'>English</option>
+         <option value='pa'>Punjabi</option>
+         <option value='gu'>Gujarati</option>
+         <option value='ta'>Tamil</option>
+         <option value='ml'>Malayam</option>
+         <option value='kn'>Kannada</option>
+         <option value='bn'>Bengali</option>
+        </select>
+     </form>
+        <br> 
+        <button onclick="voice()"><img src="https://cdn-icons-gif.flaticon.com/8121/8121297.gif" alt="speak" height="50" width="50"></button>
+        <!--https://www.iconpacks.net/icons/1/free-microphone-icon-342-thumb.png-->
+       
+        <br>
+
+        <!--<input id='txtInput' /> <br><br>-->
+        <textarea  id='txtInput' cols="75" rows="10">{{prediction}}</textarea>
+        <br>
+        <br>
+        Select Voice: <select id='voiceList'></select> <br><br>
+
+        <button id='btnSpeak'><img src="https://img.icons8.com/ios-filled/2x/speaker.png" alt="speak" height="40" width="50"> </button>
+        <!--https://img.icons8.com/ios-filled/2x/speaker.png-->
+        
+        
+    </div>
+</div>
+    <script>
+        function voice(){
+            var recognition = new webkitSpeechRecognition();
+            
+            recognition.lang="mr-GB";
+            recognition.onresult= function(event){
+                console.log(event);
+                document.getElementById("speechToText").value = event.results[0][0].transcript;
+            }
+            recognition.start();
+        }
+    </script>
+    <br>
+    <script>
+        var txtInput = document.querySelector('#txtInput');
+        var voiceList = document.querySelector('#voiceList');
+        var btnSpeak = document.querySelector('#btnSpeak');
+        var synth = window.speechSynthesis;
+        var voices = [];
+
+        PopulateVoices();
+        if(speechSynthesis !== undefined){
+            speechSynthesis.onvoiceschanged = PopulateVoices;
+        }
+
+        btnSpeak.addEventListener('click', ()=> {
+            var toSpeak = new SpeechSynthesisUtterance(txtInput.value);
+            var selectedVoiceName = voiceList.selectedOptions[0].getAttribute('data-name');
+            voices.forEach((voice)=>{
+                if(voice.name === selectedVoiceName){
+                    toSpeak.voice = voice;
+                }
+            });
+            synth.speak(toSpeak);
+        });
+
+        function PopulateVoices(){
+            voices = synth.getVoices();
+            var selectedIndex = voiceList.selectedIndex < 0 ? 0 : voiceList.selectedIndex;
+            voiceList.innerHTML = '';
+            voices.forEach((voice)=>{
+                var listItem = document.createElement('option');
+                listItem.textContent = voice.name;
+                listItem.setAttribute('data-lang', voice.lang);
+                listItem.setAttribute('data-name', voice.name);
+                voiceList.appendChild(listItem);
+            });
+
+            voiceList.selectedIndex = selectedIndex;
+        }
+    </script>
+
+    <!--results
+    <div class="results">
+        <h3>correct text</h3>
+        {{correct_text}}
+        <h3>Translated text:</h3>
+        {{prediction}}
+    </div>
+
+    <div class='footer'>
+        <p class='footer-description'>Language text & speech translation support.</p>
+        
+    </div>
+        Footer -->
+
+</body>
+</html>

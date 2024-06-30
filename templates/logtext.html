@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Model Deployment</title>
+  <link href="https://fonts.googleapis.com/css?family=Assistant:400,700" rel="stylesheet">
+  <link rel="stylesheet" href="static/logstyle.css">
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+
+</head>
+<body>
+  <!-- partial:index.partial.html -->
+  <section class='login' id='login'>
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">हमारी भाषा</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">हमारी भाषा</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{{ url_for('predict') }}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('img_to_text') }}">Img to Txt</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('vid_to_text') }}">video to Txt</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('summarize') }}">summarize text</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('send_email') }}">Feedback from</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('tutorial') }}">Demo Tutorial</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('orglogin') }}">login</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+  <br>
+  <div class='head'>
+  <h1 class='company'>Language Translator</h1>
+  </div>
+  <p class='msg'>location: {{location}}</p>
+  <p class='msg'>lang: marathi</p>
+  <div class='form'>
+    <button class="btn btn-light" onclick="voice()"><img src="https://www.iconpacks.net/icons/1/free-microphone-icon-342-thumb.png"  height="50" width="50"></button>
+        <!--https://www.iconpacks.net/icons/1/free-microphone-icon-342-thumb.png-->
+        <br>
+    <form action="{{ url_for('predict') }}" method="post"><br>
+      
+
+      <select name="source" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+        <option value='mr'>Source lang</option>
+        <option value='hi'>Hindi</option>
+        <option value='mr'>Marathi</option>
+        <option value='te'>Telegu</option>
+        <option value='pa'>Punjabi</option>
+        <option value='en'>English</option>
+        <option value='gu'>Gujarati</option>
+        <option value='ta'>Tamil</option>
+        <option value='ml'>Malayam</option>
+        <option value='kn'>Kannada</option>
+        <option value='bn'>Bengali</option>
+      </select><br>
+      <h4>Input Text</h4>
+      <!--<input type="textarea" name="message" placeholder='Username' class='text' id='username' required><br>-->
+      <textarea class="form-control" name="message" rows="10" cols="75" placeholder="Enter Your Text Here..." id='username'>{{msg}}</textarea><br>
+
+      <button class="btn btn-primary btn btn-dark"><a type="submit" name="predict" class='btn-login' id='do-login'>Translate</a></button><br><br>
+
+      <select  name="cars" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+        <option value='mr'>Destination lang</option>
+        <option value='hi'>Hindi</option>
+        <option value='mr'>Marathi</option>
+        <option value='te'>Telegu</option>
+        <option value='pa'>Punjabi</option>
+        <option value='en'>English</option>
+        <option value='gu'>Gujarati</option>
+        <option value='ta'>Tamil</option>
+        <option value='ml'>Malayam</option>
+        <option value='kn'>Kannada</option>
+        <option value='bn'>Bengali</option>
+      </select><br>
+      
+ 
+   </form>
+   
+   <br><br>
+   <h3 style="color: black;">Transliterate text:</h3>
+   <textarea class="form-control d-flex flex-row" id='txtInput' cols="75" rows="10"> {{script}}</textarea>
+         <br>
+   <h4 style="color: black;">Translated Text</h4>
+   <textarea class="form-control"  cols="75" rows="10">{{prediction}}</textarea>
+        <br>
+        <br>
+        <div  class="results">
+      Select Voice: <select id='voiceList' class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"></select> <br>
+
+      <button class="btn btn-light" id='btnSpeak'><img src="https://img.icons8.com/ios-filled/2x/speaker.png" alt="speak" height="50" width="50"> </button>
+        <!--https://img.icons8.com/ios-filled/2x/speaker.png-->
+        <br>
+   <!--<div style="text-align:center" class="results">
+    <h5>Text given in image</h5>
+    {{ocr_output}}
+    <br>
+    <h5>Translated text:</h5>
+    {{text_msg}}-->
+
+</div>
+  </div>
+</section>
+<footer>
+ <!--<p>copyrights reserve to मेरी भाषा</p>-->
+  <!--<p>Made with <span class='heart'>&hearts;</span> by Bridges(<a href='https://github.com/pxntxs'>@pxntxs</a>)</p>
+  <p>Gradient: <a href='https://uigradients.com/#Turquoiseflow'>https://uigradients.com/#Turquoiseflow</a></p>
+</footer>-->
+<!-- partial 
+  <script  src="./script.js"></script>-->
+  <script>
+    function voice(){
+        var recognition = new webkitSpeechRecognition();
+        
+        recognition.lang="mr-GB";
+        recognition.onresult= function(event){
+            console.log(event);
+            document.getElementById("username").value = event.results[0][0].transcript;
+        }
+        recognition.start();
+    }
+</script>
+<script>
+    var txtInput = document.querySelector('#txtInput');
+    var voiceList = document.querySelector('#voiceList');
+    var btnSpeak = document.querySelector('#btnSpeak');
+    var synth = window.speechSynthesis;
+    var voices = [];
+
+    PopulateVoices();
+    if(speechSynthesis !== undefined){
+        speechSynthesis.onvoiceschanged = PopulateVoices;
+    }
+
+    btnSpeak.addEventListener('click', ()=> {
+        var toSpeak = new SpeechSynthesisUtterance(txtInput.value);
+        var selectedVoiceName = voiceList.selectedOptions[0].getAttribute('data-name');
+        voices.forEach((voice)=>{
+            if(voice.name === selectedVoiceName){
+                toSpeak.voice = voice;
+            }
+        });
+        synth.speak(toSpeak);
+    });
+
+    function PopulateVoices(){
+        voices = synth.getVoices();
+        var selectedIndex = voiceList.selectedIndex < 0 ? 0 : voiceList.selectedIndex;
+        voiceList.innerHTML = '';
+        voices.forEach((voice)=>{
+            var listItem = document.createElement('option');
+            listItem.textContent = voice.name;
+            listItem.setAttribute('data-lang', voice.lang);
+            listItem.setAttribute('data-name', voice.name);
+            voiceList.appendChild(listItem);
+        });
+
+        voiceList.selectedIndex = selectedIndex;
+    }
+</script>
+
+</body>
+</html>

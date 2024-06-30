@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Deployment</title>
+    <script src="https://kit.fontawesome.com/5f3f547070.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Yatra+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/style.css">
+
+</head>
+<body>
+    
+    <!-- Website Title -->
+    <div class="container">
+        <h2 class='container-heading'><span class="heading_font">Language translator</span></h2>
+        <div class='description'>
+            <p>A Machine Learning Web App, Built with Flask, Deployed using Heroku.</p>
+        </div>
+    </div>
+    
+
+    <!-- Text Area -->
+    <div class="ml-container">
+        <form action= "{{ url_for('predict') }}" method="POST">
+            
+            <textarea class='message-box' name="message" rows="10" cols="75" placeholder="Enter Your English Text Here..." id="speechToText">{{msg}}</textarea><br/>
+            
+            <label for="cars">Chose destination lang:</label>
+            <select name="cars" placeholder="lang">
+             <option value='hi'>hindi</option>
+             <option value='mr'>marathi</option>
+             <option value='te'>telegu</option>
+             <option value='en'>English</option>
+             <option value='pa'>punjabi</option>
+            </select>
+            <br>
+            <label for="source">Chose source lang:</label>
+            <select name="source" placeholder="lang">
+             <option value='hi'>hindi</option>
+             <option value='mr'>marathi</option>
+             <option value='te'>telegu</option>
+             <option value='pa'>punjabi</option>
+             <option value='en'>English</option>
+            </select>
+            <br>
+            
+            
+            
+            <input type="submit" name="predict"class="my-cta-button" value="Predict">
+        </form>
+        
+        <button onclick="voice()">click to speech</button>
+        Select Voice: <select id='voiceList'></select> <br><br>
+        <!--<input id='txtInput' /> <br><br>-->
+        <textarea  id='txtInput' cols="30" rows="10">{{prediction}}</textarea>
+        <button id='btnSpeak'>Speak!</button>
+        
+        
+    </div>
+    <script>
+        function voice(){
+            var recognition = new webkitSpeechRecognition();
+            
+            recognition.lang="mr-GB";
+            recognition.onresult= function(event){
+                console.log(event);
+                document.getElementById("speechToText").value = event.results[0][0].transcript;
+            }
+            recognition.start();
+        }
+    </script>
+    <br>
+    <script>
+        var txtInput = document.querySelector('#txtInput');
+        var voiceList = document.querySelector('#voiceList');
+        var btnSpeak = document.querySelector('#btnSpeak');
+        var synth = window.speechSynthesis;
+        var voices = [];
+
+        PopulateVoices();
+        if(speechSynthesis !== undefined){
+            speechSynthesis.onvoiceschanged = PopulateVoices;
+        }
+
+        btnSpeak.addEventListener('click', ()=> {
+            var toSpeak = new SpeechSynthesisUtterance(txtInput.value);
+            var selectedVoiceName = voiceList.selectedOptions[0].getAttribute('data-name');
+            voices.forEach((voice)=>{
+                if(voice.name === selectedVoiceName){
+                    toSpeak.voice = voice;
+                }
+            });
+            synth.speak(toSpeak);
+        });
+
+        function PopulateVoices(){
+            voices = synth.getVoices();
+            var selectedIndex = voiceList.selectedIndex < 0 ? 0 : voiceList.selectedIndex;
+            voiceList.innerHTML = '';
+            voices.forEach((voice)=>{
+                var listItem = document.createElement('option');
+                listItem.textContent = voice.name;
+                listItem.setAttribute('data-lang', voice.lang);
+                listItem.setAttribute('data-name', voice.name);
+                voiceList.appendChild(listItem);
+            });
+
+            voiceList.selectedIndex = selectedIndex;
+        }
+    </script>
+    <!--results-->
+    <div class="results">
+        <h3>correct text</h3>
+        {{correct_text}}
+        <h3>Translated text:</h3>
+        {{prediction}}
+    </div>
+
+    <!-- Footer -->
+    <div class='footer'>
+        <p class='footer-description'>Language text & speech translation support.</p>
+    </div>
+</body>
+</html>

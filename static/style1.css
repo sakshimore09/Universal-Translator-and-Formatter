@@ -1,0 +1,74 @@
+*{
+    padding:0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    /* box-sizing: border-box;   */
+}
+
+
+body{
+    width: 100%;
+    height: 100vh;
+    background-color: darkcyan;
+    font-size: 45px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("https://media.istockphoto.com/photos/blue-mesh-gradient-blurred-motion-abstract-background-picture-id1185747322?k=20&m=1185747322&s=612x612&w=0&h=Sy7s4nSTKEbDFY1HRAijhMJVRZd4_9rACOOjkkNa5bs=")
+}
+
+h1{
+    text-align: center;
+    color: crimson;
+}
+.img-heading{
+    text-align: center;
+}
+#btn{
+    height: 55px;
+    font-size: 35px;
+}
+
+.my-cta-button{
+    height: 50px;
+    font-size: 25px;
+    color:limegreen;
+    background-color: rgb(138, 63, 133);
+    border-radius: 20px;
+   
+}
+.results{
+    font: 35px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+}
+
+/* navbar */
+nav{
+    background: rgb(8, 0, 8);
+    height: 80px;
+    width: 100%;
+}
+
+nav ul {
+    float: right;
+    margin-right: 20px;
+}
+nav ul li{
+    display: inline-block;
+    line-height: 80px;
+    margin: 0 5px;
+}
+nav ul li a{
+    color: aliceblue;
+    font-size: 17px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;  
+}
