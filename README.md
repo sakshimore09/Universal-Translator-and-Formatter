@@ -42,7 +42,7 @@ Efficiently generate summaries of lengthy texts, helping users quickly grasp the
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/harshalpatil7372/document-chat-translator.git
+   git clone https://github.com/sakshimore09/Universal-Translator-and-Formatter.git
    ```
 
 2. Navigate to the project directory:
